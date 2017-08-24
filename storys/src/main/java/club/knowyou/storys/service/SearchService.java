@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +22,16 @@ import java.util.List;
 public class SearchService {
 
 
-    public JSONObject search(String bookName) throws Exception{
-        this.dashubaoSearch(bookName);
-        return new JSONObject();
+    public List<BookInfo> search(String bookName) throws Exception{
+        List<BookInfo> bookInfos = this.dashubaoSearch(bookName);
+        return bookInfos;
     }
 
     //大书包网站搜索
     //http://zn.dashubao.net/cse/search?q=斗破苍穹&s=9410583021346449776&nsid=0
 
-    public JSONObject dashubaoSearch(String bookName) throws Exception {
-//        bookName = URLEncoder.encode(bookName);
-        JSONObject retObj = new JSONObject();
+    public List<BookInfo> dashubaoSearch(String bookName) throws Exception {
+
         List<BookInfo> bookInfos = new ArrayList<BookInfo>();
         String url = "http://zn.dashubao.net/cse/search?q=" + bookName + "&s=9410583021346449776&nsid=0";
         Connection connect = Jsoup.connect(url);
@@ -73,6 +73,6 @@ public class SearchService {
             }
 
         }
-        return JSONObject.parseObject(bookInfos.toString());
+        return bookInfos;
     }
 }

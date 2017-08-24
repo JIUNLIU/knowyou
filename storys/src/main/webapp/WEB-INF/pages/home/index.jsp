@@ -21,8 +21,8 @@
 </script>
 <body>
 <div>
-    <form method="post" name="searchBook" action="/story/search">
-        <input class="searchBookName" id="bookName" type="search">
+    <form method="get" name="searchBook" action="/story/search">
+        <input name="bookName" class="searchBookName" id="bookName" type="search">
 
         <button type="submit" onclick="search()">搜索</button>
     </form>
